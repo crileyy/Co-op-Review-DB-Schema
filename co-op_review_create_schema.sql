@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS `company_location` (
   `company_id` INT NOT NULL,
   `location_id` INT NOT NULL,
   
-  CONSTRAINT `company_id` FOREIGN KEY (company_id) REFERENCES company (company_id),
-  CONSTRAINT `company_id` FOREIGN KEY (company_id) REFERENCES company (company_id)
+  CONSTRAINT `cl_company_id` FOREIGN KEY (company_id) REFERENCES company (company_id),
+  CONSTRAINT `cl_location_id` FOREIGN KEY (location_id) REFERENCES location (location_id)
 );
   
 
@@ -70,10 +70,10 @@ CREATE TABLE IF NOT EXISTS `review` (
   `location_id` INT NOT NULL,
   `num_interviews` INT NOT NULL,
   
-  CONSTRAINT `position_id` FOREIGN KEY (position_id) REFERENCES position (position_id),
-  CONSTRAINT `user_id` FOREIGN KEY (user_id) REFERENCES user (user_id),
-  CONSTRAINT `company_id` FOREIGN KEY (company_id) REFERENCES company (company_id),
-  CONSTRAINT `location_id` FOREIGN KEY (location_id) REFERENCES location (location_id));
+  CONSTRAINT `r_position_id` FOREIGN KEY (position_id) REFERENCES position (position_id),
+  CONSTRAINT `r_user_id` FOREIGN KEY (user_id) REFERENCES user (user_id),
+  CONSTRAINT `r_company_id` FOREIGN KEY (company_id) REFERENCES company (company_id),
+  CONSTRAINT `r_location_id` FOREIGN KEY (location_id) REFERENCES location (location_id));
 
 -- -----------------------------------------------------
 -- Table `position`
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS `target_major` (
   `major_id` INT NOT NULL,
   `position_id` INT NOT NULL,
   
-  CONSTRAINT `major_id` FOREIGN KEY (major_id) REFERENCES major (major_id),
-  CONSTRAINT `position_id` FOREIGN KEY (position_id) REFERENCES position (position_id)
+  CONSTRAINT `tm_major_id` FOREIGN KEY (major_id) REFERENCES major (major_id),
+  CONSTRAINT `tm_position_id` FOREIGN KEY (position_id) REFERENCES position (position_id)
 );
 
 
@@ -125,8 +125,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `num_coops` INT NOT NULL,
   `major_id` INT NOT NULL,
   PRIMARY KEY (`user_id`),
-  
-  CONSTRAINT `major_id` FOREIGN KEY (major_id) REFERENCES major (major_id));
+
+  CONSTRAINT `u_major_id` FOREIGN KEY (major_id) REFERENCES major (major_id));
   
   
   
