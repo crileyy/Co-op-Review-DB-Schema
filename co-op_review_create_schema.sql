@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `review` (
   `rating` INT NOT NULL,
   `return_offer` BOOLEAN NULL,
   `would_work_again` BOOLEAN NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT,
   `company_id` INT NOT NULL,
   `location_id` INT NOT NULL,
   `num_interviews` INT,
@@ -250,6 +250,9 @@ insert into user values
 --   CONSTRAINT `r_user_id` FOREIGN KEY (user_id) REFERENCES user (user_id),
 --   CONSTRAINT `r_company_id` FOREIGN KEY (company_id) REFERENCES company (company_id),
 --   CONSTRAINT `r_location_id` FOREIGN KEY (location_id) REFERENCES location (location_id));
+-- insert into review values
+-- (1, 'test anon', 8, false, true, null, 1, 1, 1, 'Marketing Co-op'); add null for anon users
+
 insert into review values
 (1, 'It was a good experience', 8, false, true, 1, 1, 1, 1, 'Marketing Co-op'),
 (2, null, 8, false, false, 2, 2, 2, 1, 'Treasury Analyst Co-op'),
@@ -270,4 +273,24 @@ insert into review values
 (17, 'Cool website to work on, but the management had leadership issues and the code was quite messy.  I enjoyed the people I worked with but the headaches from the other issues gave me an overall negative experience.', 3, true, false, 17, 15, 2, null, 'Web Developer Co-op'),
 (18, 'Avoid like the plague', 3, false, false, 18, 16, 2, 3, 'Web Developer Co-op');
 
-select * from review;
+select c.name as company, avg(r.rating) as avg_rating 
+from review as r
+join company as c using (company_id)
+group by c.company_id
+having avg_rating > 7
+order by avg_rating desc;
+
+select c.name as company, avg(r.rating) as avg_rating, r.review_text as review
+from review as r
+join company as c using (company_id)
+group by c.company_id
+having avg_rating < 4
+order by avg_rating desc;
+
+select * from company;
+
+
+
+
+
+
