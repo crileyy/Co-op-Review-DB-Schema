@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS `location` ;
 CREATE TABLE IF NOT EXISTS `location` (
   `location_id` INT NOT NULL,
   `city` VARCHAR(50) NOT NULL,
-  `sate` VARCHAR(50) NULL,
+  `state` VARCHAR(50) NULL,
   `country` VARCHAR(50) NOT NULL,
   PRIMARY KEY (`location_id`));
 
